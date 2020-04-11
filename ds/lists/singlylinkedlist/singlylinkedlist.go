@@ -4,11 +4,13 @@ import (
 	"errors"
 )
 
+// Element is an element of a singly linked list.
 type Element struct {
 	next  *Element
 	value interface{}
 }
 
+// SinglyLinkedList represents a singly linked list.
 type SinglyLinkedList struct {
 	first *Element
 	last  *Element
@@ -16,33 +18,41 @@ type SinglyLinkedList struct {
 }
 
 var (
-	ErrOutOfBounds = errors.New("index is out of bounds")
+	// ErrOutOfBounds is an error that is returned if an index is out of bounds.
+	ErrOutOfBounds = errors.New("list: index is out of bounds")
 )
 
+// New creates a new list.
 func New() *SinglyLinkedList {
 	return new(SinglyLinkedList)
 }
 
+// Next returns the next element.
 func (e *Element) Next() *Element {
 	return e.next
 }
 
+// Value returns the element's value.
 func (e *Element) Value() interface{} {
 	return e.value
 }
 
+// Len returns the length of the list.
 func (l *SinglyLinkedList) Len() int {
 	return l.len
 }
 
+// First returns the first element of the list.
 func (l *SinglyLinkedList) First() *Element {
 	return l.first
 }
 
+// Empty returns true or false whether the list has zero elements or not.
 func (l *SinglyLinkedList) Empty() bool {
 	return l.len == 0
 }
 
+// Add adds a new value to the end of the list and increments the length.
 func (l *SinglyLinkedList) Add(value interface{}) {
 	newEl := &Element{value: value}
 
@@ -56,6 +66,8 @@ func (l *SinglyLinkedList) Add(value interface{}) {
 	l.len++
 }
 
+// Get fetches the element of the list by the given index.
+// If the index is out of range, ErrOutOfBounds is returned.
 func (l *SinglyLinkedList) Get(index int) (interface{}, error) {
 	if outOfRange(index, l.Len()) {
 		return nil, ErrOutOfBounds
@@ -69,6 +81,7 @@ func (l *SinglyLinkedList) Get(index int) (interface{}, error) {
 	return e.Value(), nil
 }
 
+// Remove removes an element from the list, by the given index.
 func (l *SinglyLinkedList) Remove(index int) {
 	if outOfRange(index, l.Len()) {
 		return
@@ -95,6 +108,7 @@ func (l *SinglyLinkedList) Remove(index int) {
 	l.len--
 }
 
+// Clear empties the list and sets the length to 0.
 func (l *SinglyLinkedList) Clear() {
 	l.len = 0
 	l.first = nil
