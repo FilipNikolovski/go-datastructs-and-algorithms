@@ -6,15 +6,20 @@ import (
 	"github.com/FilipNikolovski/go-datastructs-and-algorithms/ds/stacks/arraystack"
 )
 
+// Trie is a trie of runes. Each trie node has an 'end' bool flag, which
+// indicates whether the node represents the end character of a word.
 type Trie struct {
 	children map[rune]*Trie
 	end      bool
 }
 
+// NewTrie creates a new Trie.
 func NewTrie() *Trie {
 	return &Trie{}
 }
 
+// Find walks the trie by the given string and checks if the last node represents
+// an ending of a word or not.
 func (t *Trie) Find(word string) bool {
 	node := t
 	for _, r := range word {
@@ -26,6 +31,7 @@ func (t *Trie) Find(word string) bool {
 	return node.end
 }
 
+// Put adds a new word to the trie.
 func (t *Trie) Put(word string) {
 	node := t
 	for _, r := range word {
@@ -46,10 +52,13 @@ type nodeRune struct {
 }
 
 var (
+	// ErrWordNotFound is returned when a word is not found.
 	ErrWordNotFound = errors.New("trie: word not found")
-	ErrAssertType   = errors.New("trie: type assertion: not a nodeRune")
+	// ErrAssertType is returned if the type is not a nodeRune.
+	ErrAssertType = errors.New("trie: type assertion: not a nodeRune")
 )
 
+// Delete deletes a word from the trie.
 func (t *Trie) Delete(word string) error {
 	s := arraystack.New()
 	node := t
