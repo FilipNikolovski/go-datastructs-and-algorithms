@@ -47,6 +47,11 @@ func (l *SinglyLinkedList) First() *Element {
 	return l.first
 }
 
+// Last returns the last element of the list.
+func (l *SinglyLinkedList) Last() *Element {
+	return l.last
+}
+
 // Empty returns true or false whether the list has zero elements or not.
 func (l *SinglyLinkedList) Empty() bool {
 	return l.len == 0
@@ -63,6 +68,22 @@ func (l *SinglyLinkedList) Add(value interface{}) {
 	}
 
 	l.last = newEl
+	l.len++
+}
+
+// InsertBeginning adds a new element to the beginning of the list
+// and increments the length.
+func (l *SinglyLinkedList) InsertBeginning(value interface{}) {
+	newEl := &Element{value: value}
+
+	if l.len == 0 {
+		l.first = newEl
+		l.last = newEl
+	} else {
+		newEl.next = l.first
+		l.first = newEl
+	}
+
 	l.len++
 }
 

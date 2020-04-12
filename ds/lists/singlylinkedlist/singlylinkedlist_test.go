@@ -41,6 +41,13 @@ func TestSinglyLinkedList(t *testing.T) {
 		t.Errorf("expected first element to be %d, got %d", elements[0], f.Value().(int))
 	}
 
+	l.InsertBeginning(5)
+
+	f = l.First()
+	if f.Value().(int) != 5 {
+		t.Errorf("expected first element to be 5, got %d", f.Value().(int))
+	}
+
 	l.Remove(0)
 	l.Remove(l.Len() - 1)
 
@@ -50,4 +57,15 @@ func TestSinglyLinkedList(t *testing.T) {
 	}
 
 	l.Remove(0)
+
+	l.InsertBeginning(5)
+	f = l.First()
+	if f.Value().(int) != 5 {
+		t.Errorf("expected first element to be 5, got %d", f.Value().(int))
+	}
+
+	last := l.Last()
+	if f.Value().(int) != 5 {
+		t.Errorf("expected last element to be 5, got %d", last.Value().(int))
+	}
 }
