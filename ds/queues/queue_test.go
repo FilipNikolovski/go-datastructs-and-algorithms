@@ -42,6 +42,11 @@ func TestQueue(t *testing.T) {
 		t.Errorf("expected dequeued value to be nil, got %v", v)
 	}
 
+	v = q.Peek()
+	if v != nil {
+		t.Errorf("expected peek value to be nil, got %v", v)
+	}
+
 	if !q.Empty() {
 		t.Error("expected queue to be empty")
 	}

@@ -27,6 +27,10 @@ func (q *Queue) Dequeue() interface{} {
 }
 
 func (q *Queue) Peek() interface{} {
+	if q.list.Empty() {
+		return nil
+	}
+
 	return q.list.Last().Value()
 }
 
